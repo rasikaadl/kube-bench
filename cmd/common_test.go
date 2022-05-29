@@ -52,7 +52,6 @@ func TestParseSkipIds(t *testing.T) {
 }
 
 func TestNewRunFilter(t *testing.T) {
-
 	type TestCase struct {
 		Name       string
 		FilterOpts FilterOpts
@@ -139,7 +138,6 @@ func TestNewRunFilter(t *testing.T) {
 		// then
 		assert.EqualError(t, err, "group option and check option can't be used together")
 	})
-
 }
 
 func TestIsMaster(t *testing.T) {
@@ -212,7 +210,6 @@ func TestIsMaster(t *testing.T) {
 }
 
 func TestMapToCISVersion(t *testing.T) {
-
 	viperWithData, err := loadConfigForTest()
 	if err != nil {
 		t.Fatalf("Unable to load config file %v", err)
@@ -240,6 +237,8 @@ func TestMapToCISVersion(t *testing.T) {
 		{kubeVersion: "1.19", succeed: true, exp: "cis-1.20"},
 		{kubeVersion: "1.20", succeed: true, exp: "cis-1.20"},
 		{kubeVersion: "1.21", succeed: true, exp: "cis-1.20"},
+		{kubeVersion: "1.22", succeed: true, exp: "cis-1.23"},
+		{kubeVersion: "1.23", succeed: true, exp: "cis-1.23"},
 		{kubeVersion: "gke-1.2.0", succeed: true, exp: "gke-1.2.0"},
 		{kubeVersion: "ocp-3.10", succeed: true, exp: "rh-0.7"},
 		{kubeVersion: "ocp-3.11", succeed: true, exp: "rh-0.7"},

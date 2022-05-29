@@ -249,7 +249,7 @@ func (controls *Controls) ASFF() ([]*securityhub.AwsSecurityFinding, error) {
 					AwsAccountId:  aws.String(a),
 					Confidence:    aws.Int64(100),
 					GeneratorId:   aws.String(fmt.Sprintf("%s/cis-kubernetes-benchmark/%s/%s", arn, controls.Version, check.ID)),
-					Id:            aws.String(fmt.Sprintf("%s%sEKSnodeID+%s%s", arn, a, check.ID, tf)),
+					Id:            aws.String(fmt.Sprintf("%s%sEKSnodeID+%s+%s", arn, a, check.ID, c)),
 					CreatedAt:     aws.String(tf),
 					Description:   aws.String(check.Text),
 					ProductArn:    aws.String(arn),
@@ -285,6 +285,7 @@ func (controls *Controls) ASFF() ([]*securityhub.AwsSecurityFinding, error) {
 	}
 	return fs, nil
 }
+
 func getConfig(name string) (string, error) {
 	r := viper.GetString(name)
 	if len(r) == 0 {
@@ -292,6 +293,7 @@ func getConfig(name string) (string, error) {
 	}
 	return r, nil
 }
+
 func summarize(controls *Controls, state State) {
 	switch state {
 	case PASS:
